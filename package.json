@@ -1,0 +1,7 @@
+{
+  "name": "tweetlove-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Diogo Mozão Fonseca <devmozao@outlook.com>",
+  "license": "MIT"
+}
