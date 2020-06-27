@@ -2,21 +2,35 @@
 
 const routes = require('express').Router()
 
-const { api, request } = require('./services/handlerRequest')
+const Twit = require('twit')
 
-routes.get('/', async (req, res) => {
+const twit = new Twit({
+  consumer_key: process.env.CONSUMER_KEY,
+  consumer_secret: process.env.CONSUMER_SECRET,
+  access_token: process.env.TOKEN,
+  access_token_secret: process.env.TOKEN_SECRET,
+  timeout_ms: 10000
+})
+
+routes.get('/getTimeline', async (req, res) => {
   console.log(req.params)
   console.log(req.query)
   console.log(req.body)
 
-  try {
-    const response = await api.getTimeline('devmozao')
-    console.log(response)
-    return res.json(response)
-  } catch (error) {
-    console.log('error', error)
-    return res.send(error)
-  }
+  const result = await twit
+    .get('statuses/user_timeline', { screen_name: 'devmozao', count: 200 })
+    .then(response => {
+      return {
+        data: { ...response.data },
+        remaining: response.resp.headers['x-rate-limit-remaining']
+      }
+    })
+    .catch(error => {
+      return res.send(error)
+    })
+
+  console.log(result)
+  return res.json(result)
 })
 
 module.exports = routes
