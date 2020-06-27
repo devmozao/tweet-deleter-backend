@@ -5,14 +5,17 @@
   "author": "Diogo Mozão Fonseca <devmozao@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "express": "^4.17.1",
-    "standard": "^14.3.4"
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "standard": "^14.3.4"
   }
 }
