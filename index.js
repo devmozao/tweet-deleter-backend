@@ -1,13 +1,6 @@
-const express = require('express')
-const app = express()
+'use strict'
 
-const PORT = 3000
+require('dotenv').config()
+require = require('esm')(module)
 
-app.get('/', (req, res) => {
-  res.send('Teste')
-})
-
-
-app.listen(PORT, function () {
-  console.log(`Server is running on PORT:${PORT}`)
-})
+module.exports = require('./src/server')
