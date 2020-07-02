@@ -13,15 +13,18 @@ const twit = new Twit({
 })
 
 routes.get('/getTimeline', async (req, res) => {
-  console.log(req.params)
-  console.log(req.query)
-  console.log(req.body)
-
   const result = await twit
-    .get('statuses/user_timeline', { screen_name: 'devmozao', count: 200 })
+    .get('statuses/user_timeline', { screen_name: 'devmozao', count: 5 })
     .then(response => {
+      const tweets = response.data
+      const result = []
+
+      for (const tweet of tweets) {
+        result.push(tweet)
+      }
+
       return {
-        data: { ...response.data },
+        data: result,
         remaining: response.resp.headers['x-rate-limit-remaining']
       }
     })

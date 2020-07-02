@@ -5,7 +5,8 @@
   "author": "Diogo Mozão Fonseca <devmozao@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
