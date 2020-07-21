@@ -14,7 +14,7 @@ const twit = new Twit({
 
 routes.get('/getTimeline', async (req, res) => {
   const result = await twit
-    .get('statuses/user_timeline', { screen_name: 'devmozao', count: 5 })
+    .get('statuses/user_timeline', { screen_name: 'devmozao', count: 50 })
     .then(response => {
       const tweets = response.data
       const result = []
@@ -22,7 +22,6 @@ routes.get('/getTimeline', async (req, res) => {
       for (const tweet of tweets) {
         result.push(tweet)
       }
-
       return {
         data: result,
         remaining: response.resp.headers['x-rate-limit-remaining']
@@ -30,6 +29,23 @@ routes.get('/getTimeline', async (req, res) => {
     })
     .catch(error => {
       return res.send(error)
+    })
+
+  return res.json(result)
+})
+
+routes.post('/deleteTweets', async (req, res) => {
+  const value = req.body.data
+
+  const result = await Promise
+    .all(value.map(item => {
+      return twit.post('statuses/destroy/:id', { id: item })
+    }))
+    .then(response => {
+      return response
+    })
+    .catch(error => {
+      return error
     })
 
   console.log(result)
