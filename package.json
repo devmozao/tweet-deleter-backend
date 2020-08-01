@@ -14,7 +14,7 @@
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
     "express": "^4.17.1",
-    "twit": "^2.2.11"
+    "twitter-lite": "^0.14.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.4",
